@@ -1,0 +1,9 @@
+setup.py
+c/add.c
+c/libmypy.c
+hello/__init__.py
+hello/pyhello.py
+hello.egg-info/PKG-INFO
+hello.egg-info/SOURCES.txt
+hello.egg-info/dependency_links.txt
+hello.egg-info/top_level.txt
