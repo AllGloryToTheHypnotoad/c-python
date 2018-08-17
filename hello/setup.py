@@ -69,7 +69,8 @@ class BuildCommand2(Command):
         print('+----------------------------------\n\n' + Style.RESET_ALL)
 
         pkg = self.pkg
-        print('Delete dist directory and clean up binary files')
+        self.cprint(Fore.RED, 'Delete dist directory and clean up binary files')
+        self.cprint(Fore.RED, '-----------------------------------------------')
 
         self.rmdir('dist')
         self.rmdir('build')
@@ -87,22 +88,22 @@ class BuildCommand2(Command):
             if self.py2:
                 ret = os.system("unset PYTHONPATH; python2 -m nose -w tests -v test.py")
                 if ret > 0:
-                    print('<<< Python2 nose tests failed >>>')
+                    self.cprint(Fore.WHITE + Back.RED, '<<< Python2 nose tests failed >>>')
                     return
             if self.py3:
                 ret = os.system("unset PYTHONPATH; python3 -m nose -w tests -v test.py")
                 if ret > 0:
-                    print('<<< Python3 nose tests failed >>>')
+                    self.cprint(Fore.WHITE + Back.RED, '<<< Python3 nose tests failed >>>')
                     return
 
         print('Building packages ...')
         self.cprint(Fore.WHITE + Back.GREEN,'>> Python source ----------------------------------------------')
         os.system("unset PYTHONPATH; python setup.py sdist")
         if self.py2:
-            self.cprint(Fore.GREEN,'>> Python 2 ---------------------------------------------------')
+            self.cprint(Fore.WHITE + Back.CYAN,'>> Python 2 Wheel ---------------------------------------------------')
             os.system("unset PYTHONPATH; python2 setup.py bdist_wheel")
         if self.py3:
-            self.cprint(Fore.BLUE,'>> Python 3 ---------------------------------------------------')
+            self.cprint(Fore.WHITE + Back.BLUE,'>> Python 3 Wheel ---------------------------------------------------')
             os.system("unset PYTHONPATH; python3 setup.py bdist_wheel")
 
 
